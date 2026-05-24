@@ -1,0 +1,14 @@
+{
+  "name": "grade-backend",
+  "version": "1.0.0",
+  "description": "학생 성적 관리 시스템 백엔드",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "mysql2": "^3.6.0",
+    "cors": "^2.8.5"
+  }
+}
