@@ -163,6 +163,110 @@ tr:hover {
 .grade-D { background: #fdebd0; color: #a04000; }
 .grade-F { background: #fadbd8; color: #922b21; }
 
+/* 검색창 */
+.search-bar {
+  margin-bottom: 14px;
+}
+
+.search-bar input {
+  width: 100%;
+  padding: 8px 14px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.search-bar input:focus {
+  outline: none;
+  border-color: #3498db;
+}
+
+/* 정렬 가능한 컬럼 헤더 */
+th.sortable {
+  cursor: pointer;
+  user-select: none;
+}
+
+th.sortable:hover {
+  background: #eaf4fb;
+}
+
+/* 성적 없는 학생 행 강조 */
+.no-score-row {
+  background: #fffbf0;
+}
+
+.no-score-row:hover {
+  background: #fef9e0;
+}
+
+/* 미입력 뱃지 */
+.badge-none {
+  background: #fdebd0;
+  color: #a04000;
+  font-size: 0.78rem;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+/* 수정 버튼 */
+.edit-btn {
+  background: #27ae60;
+  font-size: 0.8rem;
+  padding: 5px 12px;
+  margin-right: 4px;
+}
+
+.edit-btn:hover {
+  background: #1e8449;
+}
+
+/* 저장 버튼 */
+.save-btn {
+  background: #e67e22;
+  font-size: 0.8rem;
+  padding: 5px 12px;
+  margin-right: 4px;
+}
+
+.save-btn:hover {
+  background: #ca6f1e;
+}
+
+/* 인라인 수정용 입력 필드 */
+.inline-input {
+  padding: 4px 8px;
+  border: 1px solid #3498db;
+  border-radius: 4px;
+  font-size: 0.88rem;
+  width: 100%;
+  max-width: 140px;
+}
+
+.inline-input.small {
+  max-width: 90px;
+}
+
+/* 아코디언 성적 수정 버튼 */
+.edit-score-btn {
+  background: #27ae60;
+  font-size: 0.75rem;
+  padding: 3px 8px;
+  margin-left: 4px;
+}
+
+.edit-score-btn:hover {
+  background: #1e8449;
+}
+
+/* 미니 버튼 (아코디언 내부) */
+button.mini {
+  font-size: 0.75rem;
+  padding: 3px 8px;
+  margin-left: 2px;
+}
+
 /* 클릭 가능한 학생 이름 */
 .student-name {
   cursor: pointer;

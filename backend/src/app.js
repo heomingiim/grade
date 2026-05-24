@@ -130,6 +130,10 @@ app.put('/api/students/:id', async (req, res) => {
     return res.status(400).json({ error: '이름과 학번을 모두 입력해주세요.' });
   }
 
+  if (!/^\d+$/.test(student_no)) {
+    return res.status(400).json({ error: '학번은 숫자만 입력할 수 있습니다.' });
+  }
+
   try {
     const [result] = await pool.query(
       'UPDATE students SET name = ?, student_no = ? WHERE id = ?',
@@ -197,6 +201,15 @@ app.post('/api/students/:id/scores', async (req, res) => {
   }
 
   try {
+    // 같은 학생에게 동일 과목이 이미 있는지 확인 (중복 방지)
+    const [existing] = await pool.query(
+      'SELECT id FROM scores WHERE student_id = ? AND subject = ?',
+      [req.params.id, subject]
+    );
+    if (existing.length > 0) {
+      return res.status(409).json({ error: `'${subject}'은(는) 이미 등록된 과목입니다.` });
+    }
+
     const [result] = await pool.query(
       'INSERT INTO scores (student_id, subject, score) VALUES (?, ?, ?)',
       [req.params.id, subject, score]
