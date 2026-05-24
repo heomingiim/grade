@@ -18,20 +18,32 @@ async function loadStudents() {
 
   // 받아온 학생 목록을 반복하면서 테이블 행 생성
   data.forEach(student => {
-    // 테이블 행 추가
+    // 학생 기본 정보 행
     const tr = document.createElement('tr');
     tr.innerHTML = `
-      <td>${student.name}</td>
+      <td>
+        <!-- 이름 클릭 시 성적 상세 아코디언 토글 -->
+        <span class="student-name" onclick="toggleDetail(${student.id}, this)">
+          ${student.name} <span class="arrow">▼</span>
+        </span>
+      </td>
       <td>${student.student_no}</td>
       <td>${student.subject_count}</td>
       <td>${student.avg_score ?? '-'}</td>
       <td><span class="grade grade-${student.grade}">${student.grade}</span></td>
       <td>
-        <button class="view-btn" onclick="loadScores(${student.id}, '${student.name}')">성적보기</button>
         <button class="danger" onclick="deleteStudent(${student.id})">삭제</button>
       </td>
     `;
     tbody.appendChild(tr);
+
+    // 성적 상세가 펼쳐질 빈 행 (기본 숨김)
+    const detailTr = document.createElement('tr');
+    detailTr.id = `detail-${student.id}`;
+    detailTr.className = 'detail-row';
+    detailTr.style.display = 'none';
+    detailTr.innerHTML = `<td colspan="6"><div class="detail-box" id="detail-box-${student.id}">로딩 중...</div></td>`;
+    tbody.appendChild(detailTr);
 
     // 드롭다운에 학생 옵션 추가
     const option = document.createElement('option');
@@ -113,6 +125,44 @@ document.getElementById('scoreForm').addEventListener('submit', async (e) => {
     msg.className = 'msg error';
   }
 });
+
+// ════════════════════════════════════════════════════════════════
+// 이름 클릭 시 성적 상세 아코디언 토글
+// ════════════════════════════════════════════════════════════════
+async function toggleDetail(studentId, nameEl) {
+  const detailRow = document.getElementById(`detail-${studentId}`);
+  const detailBox = document.getElementById(`detail-box-${studentId}`);
+  const arrow     = nameEl.querySelector('.arrow');
+
+  // 이미 열려있으면 닫기
+  if (detailRow.style.display !== 'none') {
+    detailRow.style.display = 'none';
+    arrow.textContent = '▼';
+    return;
+  }
+
+  // 열기 + 성적 데이터 fetch
+  detailRow.style.display = '';
+  arrow.textContent = '▲';
+
+  const res  = await fetch(`${API}/students/${studentId}/scores`);
+  const data = await res.json();
+
+  if (data.length === 0) {
+    detailBox.innerHTML = '<p class="no-score">등록된 성적이 없습니다.</p>';
+    return;
+  }
+
+  // 과목별 점수 목록을 태그로 렌더링
+  const items = data.map(s => `
+    <span class="score-item">
+      <span class="score-subject">${s.subject}</span>
+      <span class="score-value">${s.score}점</span>
+    </span>
+  `).join('');
+
+  detailBox.innerHTML = items;
+}
 
 // ════════════════════════════════════════════════════════════════
 // 학생 삭제 (DELETE /api/students/:id)
