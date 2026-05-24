@@ -51,6 +51,13 @@ document.getElementById('studentForm').addEventListener('submit', async (e) => {
   const student_no = document.getElementById('student_no').value.trim();
   const msg        = document.getElementById('studentMsg');
 
+  // 학번은 숫자만 허용 (정규표현식으로 검사)
+  if (!/^\d+$/.test(student_no)) {
+    msg.textContent = '학번은 숫자만 입력할 수 있습니다.';
+    msg.className = 'msg error';
+    return;
+  }
+
   // fetch POST 요청: body에 JSON 형태로 데이터 전송
   const res = await fetch(`${API}/students`, {
     method: 'POST',

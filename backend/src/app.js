@@ -27,12 +27,6 @@ pool.pool.on('connection', (conn) => {
   conn.query("SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci");
 });
 
-// ─── 디버그: 백엔드 DB 연결의 실제 charset 확인용 ────────────────
-app.get('/api/debug', async (req, res) => {
-  const [rows] = await pool.query("SHOW VARIABLES LIKE 'character_set%'");
-  res.json(rows);
-});
-
 // ─── 등급 계산 함수 ─────────────────────────────────────────────
 // 평균 점수를 받아서 A~F 등급을 반환한다
 function calcGrade(avg) {
@@ -103,6 +97,11 @@ app.post('/api/students', async (req, res) => {
 
   if (!name || !student_no) {
     return res.status(400).json({ error: '이름과 학번을 모두 입력해주세요.' });
+  }
+
+  // 학번은 숫자만 허용 (서버에서도 이중 검증)
+  if (!/^\d+$/.test(student_no)) {
+    return res.status(400).json({ error: '학번은 숫자만 입력할 수 있습니다.' });
   }
 
   try {
