@@ -1,0 +1,176 @@
+/* 전체 기본 스타일 */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #f0f2f5;
+  color: #333;
+}
+
+/* 상단 헤더 */
+header {
+  background: #2c3e50;
+  color: white;
+  padding: 20px 40px;
+}
+
+header h1 {
+  font-size: 1.5rem;
+}
+
+/* 메인 레이아웃 */
+main {
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* 카드 컴포넌트 */
+.card {
+  background: white;
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.card h2 {
+  font-size: 1.1rem;
+  margin-bottom: 16px;
+  color: #2c3e50;
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 8px;
+}
+
+/* 섹션 헤더 (제목 + 버튼 나란히) */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.section-header h2 {
+  margin-bottom: 0;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+/* 폼 스타일 */
+form {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+input, select {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  flex: 1;
+  min-width: 120px;
+}
+
+input:focus, select:focus {
+  outline: none;
+  border-color: #3498db;
+}
+
+/* 버튼 스타일 */
+button {
+  padding: 8px 20px;
+  background: #3498db;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+button:hover {
+  background: #2980b9;
+}
+
+button.danger {
+  background: #e74c3c;
+}
+
+button.danger:hover {
+  background: #c0392b;
+}
+
+button.secondary {
+  background: #95a5a6;
+}
+
+button.secondary:hover {
+  background: #7f8c8d;
+}
+
+/* 안내 메시지 */
+.msg {
+  margin-top: 10px;
+  font-size: 0.85rem;
+  color: #27ae60;
+}
+
+.msg.error {
+  color: #e74c3c;
+}
+
+/* 테이블 스타일 */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+th, td {
+  padding: 10px 14px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+th {
+  background: #f8f9fa;
+  font-weight: 600;
+  color: #555;
+}
+
+tr:hover {
+  background: #f9fbff;
+}
+
+/* 등급 배지 */
+.grade {
+  font-weight: bold;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+}
+
+.grade-A { background: #d5f5e3; color: #1e8449; }
+.grade-B { background: #d6eaf8; color: #1a5276; }
+.grade-C { background: #fef9e7; color: #b7950b; }
+.grade-D { background: #fdebd0; color: #a04000; }
+.grade-F { background: #fadbd8; color: #922b21; }
+
+/* 성적 조회 버튼 */
+.view-btn {
+  background: #8e44ad;
+  font-size: 0.8rem;
+  padding: 5px 12px;
+  margin-right: 4px;
+}
+
+.view-btn:hover {
+  background: #71368a;
+}
