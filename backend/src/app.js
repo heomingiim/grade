@@ -19,6 +19,18 @@ const pool = mysql2.createPool({
   user:     process.env.DB_USER     || 'root',
   password: process.env.DB_PASSWORD || '1234',
   database: process.env.DB_NAME     || 'gradedb',
+  charset:  'UTF8MB4_UNICODE_CI',
+});
+
+// 연결마다 명시적으로 utf8mb4 charset을 설정한다 (한글 깨짐 방지)
+pool.pool.on('connection', (conn) => {
+  conn.query("SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci");
+});
+
+// ─── 디버그: 백엔드 DB 연결의 실제 charset 확인용 ────────────────
+app.get('/api/debug', async (req, res) => {
+  const [rows] = await pool.query("SHOW VARIABLES LIKE 'character_set%'");
+  res.json(rows);
 });
 
 // ─── 등급 계산 함수 ─────────────────────────────────────────────

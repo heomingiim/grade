@@ -1,3 +1,9 @@
+-- init.sql 파일 자체를 utf8mb4로 읽도록 선언 (이게 없으면 한글 INSERT가 깨져서 저장됨)
+SET NAMES utf8mb4;
+
+-- DB 기본 인코딩을 UTF-8(utf8mb4)로 설정한다 (한글 지원)
+ALTER DATABASE gradedb CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
 -- 학생 정보 테이블
 -- 학생의 기본 정보를 저장한다
 CREATE TABLE IF NOT EXISTS students (
