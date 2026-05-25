@@ -163,6 +163,45 @@ tr:hover {
 .grade-D { background: #fdebd0; color: #a04000; }
 .grade-F { background: #fadbd8; color: #922b21; }
 
+/* 대시보드 */
+.dashboard {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.dash-card {
+  background: white;
+  border-radius: 8px;
+  padding: 24px 20px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  border-top: 4px solid #3498db;
+}
+
+.dash-card:nth-child(2) { border-top-color: #27ae60; }
+.dash-card:nth-child(3) { border-top-color: #e67e22; }
+
+.dash-label {
+  font-size: 0.85rem;
+  color: #888;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.dash-value {
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: #2c3e50;
+  line-height: 1;
+}
+
+.dash-sub {
+  font-size: 0.85rem;
+  color: #aaa;
+  margin-top: 4px;
+}
+
 /* 검색창 */
 .search-bar {
   margin-bottom: 14px;

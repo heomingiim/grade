@@ -39,7 +39,26 @@ function applyFilterAndSort() {
     });
   }
 
+  updateDashboard();   // 대시보드는 필터와 무관하게 전체 기준으로 표시
   renderStudents(list);
+}
+
+// 대시보드 수치를 allStudents 기준으로 계산해서 갱신한다
+function updateDashboard() {
+  const total   = allStudents.length;
+  const entered = allStudents.filter(s => s.subject_count > 0).length;
+
+  // 성적이 있는 학생들의 평균만 모아서 전체 평균 계산
+  const avgs = allStudents
+    .filter(s => s.avg_score !== null)
+    .map(s => parseFloat(s.avg_score));
+  const overallAvg = avgs.length > 0
+    ? (avgs.reduce((sum, v) => sum + v, 0) / avgs.length).toFixed(1)
+    : '-';
+
+  document.getElementById('dash-total').textContent   = total;
+  document.getElementById('dash-entered').textContent = entered;
+  document.getElementById('dash-avg').textContent     = overallAvg;
 }
 
 // 학생 목록을 테이블에 그린다
